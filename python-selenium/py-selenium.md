@@ -154,14 +154,14 @@ alert_is_present | 判断页面上是否存在alert
 
 
 ###等待
-等待分为显式等待和隐式等待<br>
+等待分为显式等待和隐式等待(推荐使用显示等待，能够缩短运行时间)<br>
 显式等待是等待某个条件成立则继续执行，否则在达到最大等待时间就会抛出异常。
 ```
 WebDriverWait(driver,timeout,poll_frequency=0.5,ignored_exception=None)
 ```
->driver:浏览器驱动<br>
-timeout:最长超时时间，默认为秒
-poll_frequency：检测的间隔时间，默认为0.5s
+>driver：浏览器驱动<br>
+timeout： 最长超时时间，默认为秒<br>
+poll_frequency：检测的间隔时间，默认为0.5s<br>
 ignored_exception：超时后的异常信息，默认抛出NoSuchElementException异常
 
 WebDriverWait一般和until()或until_not()<br>
@@ -177,3 +177,23 @@ implicitly_wait()
 ###多表单切换
 在网页中，有可能会遇见frame/iframe表单嵌套的应用，这时需要通过`switch_to.frame()`方法，将当前定位主体切换到
 表单内。使用`switch_to.default_content()`回到外层页面。
+
+###下拉框
+在网页中，如果遇见有下拉框的元素时，就需要使用Select类来定位<select>标签。
+Select提供一下几个方法：
+- select_by_value()：使用value值定位下拉选项。
+- select_by_visible_text()：通过text值定位下拉选项。
+- select_by_index()：根据下拉选项的索引进行选择，第一个选项为0.
+
+首先导入Select类：
+```
+from selenium.webdriver.support.select import Select
+```
+之后定位下拉框元素进行操作。
+```
+sel=driver.find_element_by_xpath()
+Select(sel).select_by_value("10") # 使用value选择
+Select(sel).select_by_visible_text("第10个")  # 使用text选择
+Select(sel).select_by_index(0)  # 选择第一个选项
+```
+
