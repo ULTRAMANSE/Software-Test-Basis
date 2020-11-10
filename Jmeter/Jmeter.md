@@ -4,3 +4,10 @@ Jmeter主要由取样器、逻辑控制器、配置元件、前置处理器、�
 
 ####逻辑控制器
 逻辑控制器对对脚本的执行逻辑进行控制的元件。<br>
+#####1.条件控制器
+条件控制器可以根据设定的某个条件来控制节点下的元件是否被执行。
+![条件控制器](./jmeter-image/if%20controller.png)
+参数说明：
+名称：随意设置，可为空。<br>
+注释：随意设置，可为空。<br>
+Expression:判断条件，勾选interpret condition as Variable Expression时，将会使用变量表达式来设置条件。勾选Evaluate for children时，判断条件会针对所有的子节点，不勾选只会在控制器入口处判断一次。
